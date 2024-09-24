@@ -1,11 +1,11 @@
 return {
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    'catppuccin/nvim',
+    name = 'catppuccin',
     priority = 1000,
     config = function()
-      local theme_colors = require("config.colors")
-      require("catppuccin").setup({
+      local theme_colors = require 'config.colors'
+      require('catppuccin').setup {
         transparent_background = true,
         color_overrides = { all = theme_colors },
         custom_highlights = function(colors)
@@ -17,7 +17,7 @@ return {
         integrations = {
           cmp = true,
           gitsigns = true,
-          nvimtree = true,
+          neotree = true,
           treesitter = true,
           dap_ui = true,
           noice = true,
@@ -26,16 +26,16 @@ return {
           native_lsp = {
             enabled = true,
             virtual_text = {
-              errors = { "italic" },
-              hints = { "italic" },
-              warnings = { "italic" },
-              information = { "italic" },
+              errors = { 'italic' },
+              hints = { 'italic' },
+              warnings = { 'italic' },
+              information = { 'italic' },
             },
             underlines = {
-              errors = { "underline" },
-              hints = { "underline" },
-              warnings = { "underline" },
-              information = { "underline" },
+              errors = { 'underline' },
+              hints = { 'underline' },
+              warnings = { 'underline' },
+              information = { 'underline' },
             },
             inlay_hints = {
               background = true,
@@ -44,14 +44,14 @@ return {
           notify = true,
           mini = {
             enabled = true,
-            indentscope_color = "",
+            indentscope_color = '',
           },
           telescope = {
-            enabled = true
-          }
-        }
-      })
-      vim.cmd.colorscheme "catppuccin"
-    end
-  }
+            enabled = true,
+          },
+        },
+      }
+      vim.cmd.colorscheme 'catppuccin'
+    end,
+  },
 }

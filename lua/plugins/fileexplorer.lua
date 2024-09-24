@@ -50,6 +50,7 @@ return {
         },
       },
       filesystem = {
+        follow_current_file = true,
         use_libuv_file_watcher = true,
         filtered_items = {
           hide_dotfiles = false,
@@ -63,11 +64,27 @@ return {
           },
         },
         window = {
+          position = 'float',
           mappings = {
             ['\\'] = 'close_window',
+          },
+          popup = {
+            size = {
+              height = '80%', -- Height as percentage of screen
+              width = '50%', -- Width as percentage of screen
+            },
+            position = '50%', -- Center the floating window
+            border = {
+              style = 'rounded', -- Rounded border
+              padding = { 1, 1 },
+              highlight = 'FloatBorder', -- Set the border highlight
+            },
           },
         },
       },
     }
+    vim.cmd [[
+  hi FloatBorder guifg=#A6E3A1 guibg=NONE
+]]
   end,
 }
