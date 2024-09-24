@@ -29,7 +29,7 @@ return {
           'yamllint', -- yaml linter
           'buf', -- buf formatter
           'shfmt', -- shell formatter
-          -- "gofumpt", -- go formatter
+          'gofumpt', -- go formatter
           'yamlfmt', -- yaml formatter
           -- "spell", -- spell checker
           'black', -- python formatter
