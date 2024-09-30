@@ -22,7 +22,11 @@ return {
     'jay-babu/mason-nvim-dap.nvim',
 
     -- Add your own debuggers here
-    'leoluz/nvim-dap-go',
+    'leoluz/nvim-dap-go', -- Go debugger
+    {
+      'mfussenegger/nvim-dap-python',
+      ft = 'python',
+    }, -- Python debugger
   },
   keys = function(_, keys)
     local dap = require 'dap'
@@ -64,6 +68,7 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
+        'debugpy',
       },
     }
 
@@ -101,5 +106,6 @@ return {
         detached = vim.fn.has 'win32' == 0,
       },
     }
+    require('dap-python').setup '~/.pyenv/versions/3.12.1/bin/python'
   end,
 }

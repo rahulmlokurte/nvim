@@ -195,6 +195,9 @@ return {
           },
         },
         gopls = {},
+        pyright = {
+          filetypes = { 'python' },
+        },
       }
 
       -- Ensure the servers and tools above are installed
@@ -213,6 +216,10 @@ return {
         'gofumpt',
         'goimports-reviser',
         'golines',
+        'pyright',
+        'mypy',
+        'ruff',
+        'black',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
