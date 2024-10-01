@@ -53,6 +53,35 @@ return {
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
+    dap.configurations.java = {
+      {
+        type = 'java',
+        name = 'Integration',
+        request = 'launch',
+        main = '',
+        console = 'internalConsole',
+        args = '${command:SpecifyProgramArgs}',
+        vmArgs = '-Dspring.profiles.active=integration',
+      },
+      {
+        type = 'java',
+        name = 'local',
+        request = 'launch',
+        main = '',
+        console = 'internalConsole',
+        args = '${command:SpecifyProgramArgs}',
+        vmArgs = '-Dspring.profiles.active=local',
+      },
+      {
+        type = 'java',
+        name = 'test',
+        request = 'launch',
+        main = '',
+        console = 'internalConsole',
+        args = '${command:SpecifyProgramArgs}',
+        vmArgs = '-Dspring.profiles.active=test',
+      },
+    }
 
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with

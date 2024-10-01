@@ -220,6 +220,8 @@ return {
         'mypy',
         'ruff',
         'black',
+        'java-debug-adapter',
+        'java-test',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
