@@ -42,32 +42,39 @@ return {
       luasnip.config.setup {}
 
       local kind_icons = {
-      Text = '󰉿',
-      Method = 'm',
-      Function = '󰊕',
-      Constructor = '',
-      Field = '',
-      Variable = '󰆧',
-      Class = '󰌗',
-      Interface = '',
-      Module = '',
-      Property = '',
-      Unit = '',
-      Value = '󰎠',
-      Enum = '',
-      Keyword = '󰌋',
-      Snippet = '',
-      Color = '󰏘',
-      File = '󰈙',
-      Reference = '',
-      Folder = '󰉋',
-      EnumMember = '',
-      Constant = '󰇽',
-      Struct = '',
-      Event = '',
-      Operator = '󰆕',
-      TypeParameter = '󰊄',
-    }
+        Text = '󰉿',
+        Method = 'm',
+        Function = '󰊕',
+        Constructor = '',
+        Field = '',
+        Variable = '󰆧',
+        Class = '󰌗',
+        Interface = '',
+        Module = '',
+        Property = '',
+        Unit = '',
+        Value = '󰎠',
+        Enum = '',
+        Keyword = '󰌋',
+        Snippet = '',
+        Color = '󰏘',
+        File = '󰈙',
+        Reference = '',
+        Folder = '󰉋',
+        EnumMember = '',
+        Constant = '󰇽',
+        Struct = '',
+        Event = '',
+        Operator = '󰆕',
+        TypeParameter = '󰊄',
+      }
+
+      cmp.setup.filetype({ 'javascript' }, {
+        sources = {
+          { name = 'vim-dadbod-completion' },
+          { name = 'buffer' },
+        },
+      })
 
       cmp.setup {
         snippet = {
@@ -137,12 +144,12 @@ return {
           },
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
-          { name = 'buffer'},
+          { name = 'buffer' },
           { name = 'path' },
         },
         formatting = {
-          fields = { 'kind', 'abbr', 'menu'},
-          format = function (entry, vim_item)
+          fields = { 'kind', 'abbr', 'menu' },
+          format = function(entry, vim_item)
             vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
             vim_item.menu = ({
               nvim_lsp = '[LSP]',
@@ -152,7 +159,7 @@ return {
             })[entry.source.name]
             return vim_item
           end,
-          expandable_indicator = true
+          expandable_indicator = true,
         },
       }
     end,
