@@ -58,10 +58,10 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Pane Movements
 
-vim.keymap.set('n', '<C-h>', '<C-w>h') -- Left
-vim.keymap.set('n', '<C-j>', '<C-w>j') -- Down
-vim.keymap.set('n', '<C-k>', '<C-w>k') -- Up
-vim.keymap.set('n', '<C-l>', '<C-w>l') -- Right
+vim.keymap.set('n', '<C-h>', ':wincmd h<CR>') -- Left
+vim.keymap.set('n', '<C-j>', ':wincmd j<CR>') -- Down
+vim.keymap.set('n', '<C-k>', ':wincmd k<CR>') -- Up
+vim.keymap.set('n', '<C-l>', ':wincmd l<CR>') -- Right
 
 -- Resize
 
