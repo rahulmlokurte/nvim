@@ -222,6 +222,7 @@ return {
         'black',
         'java-debug-adapter',
         'java-test',
+        'google-java-format',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
