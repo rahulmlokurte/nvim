@@ -1,5 +1,4 @@
 local jdtls = require 'jdtls'
-local format = require 'conform.formatters.google-java-format'
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 
 local workspace_dir = '/home/rahul/neo-java/' .. project_name
@@ -42,9 +41,12 @@ local config = {
         enabled = false,
         -- Use the Google Style guide for code formattingh
         settings = {
-          url = vim.fn.stdpath 'config' .. '/lang_servers/intellij-java-google-style.xml',
-          profile = 'GoogleStyle',
+          url = 'file:///home/rahul/neo-java/eclipse-java-style.xml',
+          profile = 'Default',
         },
+      },
+      formatOnType = {
+        enabled = true,
       },
       -- Enable downloading archives from eclipse automatically
       eclipse = {

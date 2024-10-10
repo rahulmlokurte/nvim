@@ -34,3 +34,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'java' },
+  callback = function()
+    vim.opt_local.expandtab = true -- Use spaces instead of tabs
+    vim.opt_local.shiftwidth = 4 -- Number of spaces to use for autoindent
+    vim.opt_local.tabstop = 4 -- Number of spaces that a <Tab> counts for
+  end,
+})
