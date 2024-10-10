@@ -34,12 +34,20 @@ return {
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer',
     },
     config = function()
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
+      local select_opts = { behavior = cmp.SelectBehavior.Select }
+      vim.api.nvim_set_hl(0, 'MyPmenuSel', { bg = '#a6e3a1', fg = 'Black', bold = true, italic = true })
+      vim.api.nvim_set_hl(0, 'CmpItemAbbr', { bg = 'NONE', fg = '#cdd6f4', bold = true, italic = true })
+      vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { bg = 'NONE', fg = '#fab387', bold = true, italic = true })
+      vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { bg = 'NONE', fg = '#cba6f7', bold = true, italic = true })
+      vim.api.nvim_set_hl(0, 'MyFloatBorder', { bg = 'NONE', fg = '#f38ba8', bold = true, italic = true })
+      vim.api.nvim_set_hl(0, 'MyPmenu', { bg = 'NONE', fg = '#b4befe', bold = true, italic = true })
 
       local kind_icons = {
         Text = '󰉿',
@@ -77,12 +85,21 @@ return {
       })
 
       cmp.setup {
+        window = {
+          completion = cmp.config.window.bordered {
+            winhighlight = 'Normal:MyPmenu,FloatBorder:MyFloatBorder,CursorLine:MyPmenuSel,Search:None',
+          },
+          documentation = cmp.config.window.bordered {
+            winhighlight = 'Normal:MyPmenu,FloatBorder:MyFloatBorder,CursorLine:MyPmenuSel,Search:None',
+          },
+        },
+
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
           end,
         },
-        completion = { completeopt = 'menu,menuone,noinsert' },
+        completion = { completeopt = 'menu,menuone,preview,noselect' },
 
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`
