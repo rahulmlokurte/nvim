@@ -27,6 +27,16 @@ return {
       'mfussenegger/nvim-dap-python',
       ft = 'python',
     }, -- Python debugger
+
+    -- Catppuccin for custom highlights
+    { 'catppuccin/nvim', as = 'catppuccin' },
+
+    {
+      'theHamsta/nvim-dap-virtual-text',
+      config = function()
+        require('nvim-dap-virtual-text').setup()
+      end,
+    },
   },
   keys = function(_, keys)
     local dap = require 'dap'
@@ -47,12 +57,21 @@ return {
       },
       -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
       { '<F7>', dapui.toggle, desc = 'Debug: See last session result.' },
+      { '<leader>dw', ":lua require'dap.ui.widgets'.hover()<CR>", silent = true, desc = 'Debug Widget Hover' },
+      { '<leader>df', ":lua require'dap.ui.widgets'.centered_float(require'dap.ui.widgets'.scopes)<CR>", silent = true, desc = 'Debug Widget Scopes' },
+      { '<leader>dr', ":lua require'dapui'.open({reset = true})<CR>", silent = true, desc = 'Reset Dapui' },
+      { '<leader>drc', ":lua require'dap'.repl.clear()", silent = true, desc = 'Clear Dapui Repl' },
       unpack(keys),
     }
   end,
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
+    local catppuccin = require('catppuccin.palettes').get_palette
+
+    -- Catppuccin palette colors
+    local colors = catppuccin()
+
     dap.configurations.java = {
       {
         type = 'java',
@@ -115,13 +134,54 @@ return {
           step_into = '⏎',
           step_over = '⏭',
           step_out = '⏮',
-          step_back = 'b',
-          run_last = '▶▶',
+          step_back = '⏪',
+          run_last = '🔁',
           terminate = '⏹',
           disconnect = '⏏',
         },
       },
+      layouts = {
+        {
+          elements = {
+            { id = 'scopes', size = 0.3 },
+            { id = 'breakpoints', size = 0.3 },
+            { id = 'stacks', size = 0.2 },
+            { id = 'watches', size = 0.2 },
+          },
+          size = 40,
+          position = 'left',
+        },
+        {
+          elements = {
+            { id = 'repl', size = 0.5 },
+            { id = 'console', size = 0.5 },
+          },
+          size = 10,
+          position = 'bottom',
+        },
+      },
+      floating = {
+        border = 'rounded',
+        mappings = {
+          close = { 'q', '<Esc>' },
+        },
+      },
     }
+
+    -- Customize DAP UI highlights using Catppuccin palette
+    vim.api.nvim_set_hl(0, 'DapUIVariable', { fg = colors.lavender })
+    vim.api.nvim_set_hl(0, 'DapUIScope', { fg = colors.pink })
+    vim.api.nvim_set_hl(0, 'DapUIType', { fg = colors.green })
+    vim.api.nvim_set_hl(0, 'DapUIValue', { fg = colors.flamingo })
+    vim.api.nvim_set_hl(0, 'DapUIBreakpointsCurrentLine', { fg = colors.yellow, bold = true })
+    vim.api.nvim_set_hl(0, 'DapUIBreakpointsPath', { fg = colors.teal })
+    vim.api.nvim_set_hl(0, 'DapUIWatchesValue', { fg = colors.red, bold = true })
+    vim.api.nvim_set_hl(0, 'DapUIFrameName', { fg = colors.blue, bold = true })
+    vim.api.nvim_set_hl(0, 'DapUIBreakpointsInfo', { fg = colors.cyan })
+    vim.api.nvim_set_hl(0, 'DapUIStoppedThread', { fg = colors.orange, bold = true })
+    vim.api.nvim_set_hl(0, 'DapUIDecoration', { fg = colors.sapphire })
+    vim.api.nvim_set_hl(0, 'DapUILineNumber', { fg = colors.mauve })
+    vim.api.nvim_set_hl(0, 'DapUIFloatBorder', { fg = colors.surface0, bg = colors.base })
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close

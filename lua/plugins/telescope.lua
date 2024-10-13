@@ -5,6 +5,7 @@ return {
     'nvim-lua/plenary.nvim',
     'nvim-telescope/telescope-dap.nvim',
     { 'nvim-telescope/telescope-ui-select.nvim' },
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   },
   config = function()
     local telescope = require 'telescope'
@@ -29,6 +30,14 @@ return {
       vim.api.nvim_set_hl(0, hl, col)
     end
     telescope.setup {
+      defaults = {
+        prompt_prefix = '🔍 ',
+        selection_caret = ' ',
+        layout_strategy = 'vertical',
+        layout_config = {
+          vertical = { width = 0.5, height = 0.8, prompt_position = 'top' },
+        },
+      },
       extensions = {
         fzf = {
           fuzzy = true,
@@ -54,35 +63,21 @@ return {
       pickers = {
         find_files = {
           theme = 'dropdown',
-          layout_config = {
-            height = 0.5,
-            width = 0.5,
-            prompt_position = 'top',
-          },
+          previwer = false,
         },
         live_grep = {
-          theme = 'dropdown',
+          theme = 'ivy',
           layout_config = {
             height = 0.5,
-            width = 0.5,
             prompt_position = 'top',
           },
         },
         buffers = {
           theme = 'dropdown',
-          layout_config = {
-            height = 0.5,
-            width = 0.5,
-            prompt_position = 'top',
-          },
+          previwer = false,
         },
         help_tags = {
-          theme = 'dropdown',
-          layout_config = {
-            height = 0.5,
-            width = 0.5,
-            prompt_position = 'top',
-          },
+          theme = 'cursor',
         },
       },
     }

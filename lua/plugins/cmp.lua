@@ -41,40 +41,45 @@ return {
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
-      local select_opts = { behavior = cmp.SelectBehavior.Select }
-      vim.api.nvim_set_hl(0, 'MyPmenuSel', { bg = '#a6e3a1', fg = 'Black', bold = true, italic = true })
-      vim.api.nvim_set_hl(0, 'CmpItemAbbr', { bg = 'NONE', fg = '#cdd6f4', bold = true, italic = true })
-      vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { bg = 'NONE', fg = '#fab387', bold = true, italic = true })
-      vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { bg = 'NONE', fg = '#cba6f7', bold = true, italic = true })
-      vim.api.nvim_set_hl(0, 'MyFloatBorder', { bg = 'NONE', fg = '#f38ba8', bold = true, italic = true })
-      vim.api.nvim_set_hl(0, 'MyPmenu', { bg = 'NONE', fg = '#b4befe', bold = true, italic = true })
 
+      local colors = require('catppuccin.palettes').get_palette()
+      -- Custom highlight groups using Catppuccin colors
+      vim.api.nvim_set_hl(0, 'MyPmenuSel', { bg = colors.green, fg = colors.mantle, bold = true, italic = true })
+      vim.api.nvim_set_hl(0, 'CmpItemAbbr', { bg = 'NONE', fg = colors.text, bold = true })
+      vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { bg = 'NONE', fg = colors.pink, bold = true })
+      vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { bg = 'NONE', fg = colors.blue, bold = true })
+      vim.api.nvim_set_hl(0, 'MyFloatBorder', { bg = 'NONE', fg = colors.red, bold = true })
+      vim.api.nvim_set_hl(0, 'MyPmenu', { bg = colors.surface0, fg = colors.lavender, bold = true })
+
+      local select_opts = { behavior = cmp.SelectBehavior.Select }
+
+      -- Define awesome icons for completion kinds with added flair
       local kind_icons = {
-        Text = '󰉿',
-        Method = 'm',
-        Function = '󰊕',
-        Constructor = '',
-        Field = '',
-        Variable = '󰆧',
-        Class = '󰌗',
-        Interface = '',
-        Module = '',
-        Property = '',
-        Unit = '',
-        Value = '󰎠',
-        Enum = '',
-        Keyword = '󰌋',
-        Snippet = '',
-        Color = '󰏘',
-        File = '󰈙',
-        Reference = '',
-        Folder = '󰉋',
-        EnumMember = '',
-        Constant = '󰇽',
-        Struct = '',
-        Event = '',
-        Operator = '󰆕',
-        TypeParameter = '󰊄',
+        Text = '  ', -- A document-like icon
+        Method = '󰆧  ',
+        Function = '󰊕  ',
+        Constructor = '  ',
+        Field = '  ',
+        Variable = '󰆧  ',
+        Class = '󰌗  ',
+        Interface = '  ',
+        Module = '  ',
+        Property = '  ',
+        Unit = '  ',
+        Value = '󰎠  ',
+        Enum = '  ',
+        Keyword = '󰌋  ',
+        Snippet = '  ',
+        Color = '󰏘  ',
+        File = '󰈙  ',
+        Reference = '  ',
+        Folder = '󰉋  ',
+        EnumMember = '  ',
+        Constant = '󰇽  ',
+        Struct = '  ',
+        Event = '  ',
+        Operator = '󰆕  ',
+        TypeParameter = '󰊄  ',
       }
 
       cmp.setup.filetype({ 'javascript' }, {
@@ -168,12 +173,18 @@ return {
           fields = { 'kind', 'abbr', 'menu' },
           format = function(entry, vim_item)
             vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
+            vim_item.abbr = string.format('%s', vim_item.abbr)
             vim_item.menu = ({
               nvim_lsp = '[LSP]',
               luasnip = '[Snippet]',
               buffer = '[Buffer]',
               path = '[Path]',
             })[entry.source.name]
+
+            -- Add spacing for better aesthetics
+            vim_item.abbr = ' ' .. vim_item.abbr .. ' '
+            vim_item.kind = ' ' .. vim_item.kind .. ' '
+
             return vim_item
           end,
           expandable_indicator = true,

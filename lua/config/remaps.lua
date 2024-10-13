@@ -50,6 +50,9 @@ vim.opt.fillchars = { eob = ' ' } -- change the character at the end of buffer
 -- vim.opt.tabstop = 2                           -- insert 2 spaces for a tab
 -- vim.opt.laststatus = 0                          -- Always display the status line
 
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
