@@ -2,6 +2,7 @@ return {
   'nvim-telescope/telescope.nvim',
   tag = '0.1.8',
   dependencies = {
+    'nvim-treesitter/nvim-treesitter',
     'nvim-lua/plenary.nvim',
     'nvim-telescope/telescope-dap.nvim',
     { 'nvim-telescope/telescope-ui-select.nvim' },
@@ -31,11 +32,17 @@ return {
     end
     telescope.setup {
       defaults = {
-        prompt_prefix = '🔍 ',
+        prompt_prefix = '   ',
         selection_caret = ' ',
-        layout_strategy = 'vertical',
+        entry_prefix = ' ',
+        sorting_strategy = 'ascending',
         layout_config = {
-          vertical = { width = 0.5, height = 0.8, prompt_position = 'top' },
+          horizontal = {
+            prompt_position = 'top',
+            preview_width = 0.80,
+          },
+          width = 0.87,
+          height = 0.80,
         },
       },
       extensions = {
@@ -58,26 +65,6 @@ return {
               },
             },
           },
-        },
-      },
-      pickers = {
-        find_files = {
-          theme = 'dropdown',
-          previwer = false,
-        },
-        live_grep = {
-          theme = 'ivy',
-          layout_config = {
-            height = 0.5,
-            prompt_position = 'top',
-          },
-        },
-        buffers = {
-          theme = 'dropdown',
-          previwer = false,
-        },
-        help_tags = {
-          theme = 'cursor',
         },
       },
     }
