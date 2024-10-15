@@ -177,7 +177,7 @@ return {
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
+        ts_ls = {},
         --
 
         lua_ls = {
@@ -223,6 +223,14 @@ return {
         'java-debug-adapter',
         'java-test',
         'google-java-format',
+        'html',
+        'cssls',
+        'tailwindcss',
+        'graphql',
+        'eslint-lsp',
+        'emmet_ls',
+        'prismals',
+        'prettierd',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
