@@ -7,6 +7,7 @@ return {
     'nvim-telescope/telescope-dap.nvim',
     { 'nvim-telescope/telescope-ui-select.nvim' },
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    { 'nvim-tree/nvim-web-devicons' },
   },
   config = function()
     local telescope = require 'telescope'
@@ -32,26 +33,36 @@ return {
     end
     telescope.setup {
       defaults = {
-        prompt_prefix = '   ',
+        layout_config = {
+          height = 0.90,
+          width = 0.90,
+          preview_cutoff = 0,
+          horizontal = { preview_width = 0.60 },
+          vertical = { width = 0.55, height = 0.9, preview_cutoff = 0 },
+          prompt_position = 'top',
+        },
+        path_display = { 'smart' },
+        prompt_prefix = ' ',
         selection_caret = ' ',
         entry_prefix = ' ',
-        sorting_strategy = 'ascending',
-        layout_config = {
-          horizontal = {
-            prompt_position = 'top',
-            preview_width = 0.80,
-          },
-          width = 0.87,
-          height = 0.80,
+      },
+      pickers = {
+        find_files = {
+          theme = 'dropdown',
+        },
+        live_grep = {
+          prompt_prefix = '󰱽 ',
+          theme = 'dropdown',
+        },
+        buffers = {
+          prompt_prefix = '󰸩 ',
+          theme = 'dropdown',
+        },
+        help_tags = {
+          theme = 'dropdown',
         },
       },
       extensions = {
-        fzf = {
-          fuzzy = true,
-          override_generic_sorter = true,
-          override_file_sorter = true,
-          case_mode = 'smart_case',
-        },
         ['ui-select'] = {
           require('telescope.themes').get_dropdown {
             initial_mode = 'normal',
@@ -71,6 +82,7 @@ return {
     telescope.load_extension 'dap'
     telescope.load_extension 'ui-select'
     telescope.load_extension 'noice'
+    telescope.load_extension 'fzf'
     local wk = require 'which-key'
     wk.add {
       { '<leader>f', group = 'file' },
