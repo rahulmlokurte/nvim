@@ -73,10 +73,6 @@ return {
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
-    local catppuccin = require('catppuccin.palettes').get_palette
-
-    -- Catppuccin palette colors
-    local colors = catppuccin()
 
     dap.configurations.java = {
       {
@@ -128,70 +124,20 @@ return {
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
-    dapui.setup {
-      -- Set icons to characters that are more likely to work in every terminal.
-      --    Feel free to remove or use ones that you like more! :)
-      --    Don't feel like these are good choices.
-      icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
-      controls = {
-        icons = {
-          pause = '⏸',
-          play = '▶',
-          step_into = '⏎',
-          step_over = '⏭',
-          step_out = '⏮',
-          step_back = '⏪',
-          run_last = '🔁',
-          terminate = '⏹',
-          disconnect = '⏏',
-        },
-      },
-      layouts = {
-        {
-          elements = {
-            { id = 'scopes', size = 0.3 },
-            { id = 'breakpoints', size = 0.3 },
-            { id = 'stacks', size = 0.2 },
-            { id = 'watches', size = 0.2 },
-          },
-          size = 40,
-          position = 'left',
-        },
-        {
-          elements = {
-            { id = 'repl', size = 0.5 },
-            { id = 'console', size = 0.5 },
-          },
-          size = 10,
-          position = 'bottom',
-        },
-      },
-      floating = {
-        border = 'rounded',
-        mappings = {
-          close = { 'q', '<Esc>' },
-        },
-      },
-    }
+    dapui.setup {}
 
-    -- Customize DAP UI highlights using Catppuccin palette
-    vim.api.nvim_set_hl(0, 'DapUIVariable', { fg = colors.lavender })
-    vim.api.nvim_set_hl(0, 'DapUIScope', { fg = colors.pink })
-    vim.api.nvim_set_hl(0, 'DapUIType', { fg = colors.green })
-    vim.api.nvim_set_hl(0, 'DapUIValue', { fg = colors.flamingo })
-    vim.api.nvim_set_hl(0, 'DapUIBreakpointsCurrentLine', { fg = colors.yellow, bold = true })
-    vim.api.nvim_set_hl(0, 'DapUIBreakpointsPath', { fg = colors.teal })
-    vim.api.nvim_set_hl(0, 'DapUIWatchesValue', { fg = colors.red, bold = true })
-    vim.api.nvim_set_hl(0, 'DapUIFrameName', { fg = colors.blue, bold = true })
-    vim.api.nvim_set_hl(0, 'DapUIBreakpointsInfo', { fg = colors.cyan })
-    vim.api.nvim_set_hl(0, 'DapUIStoppedThread', { fg = colors.orange, bold = true })
-    vim.api.nvim_set_hl(0, 'DapUIDecoration', { fg = colors.sapphire })
-    vim.api.nvim_set_hl(0, 'DapUILineNumber', { fg = colors.mauve })
-    vim.api.nvim_set_hl(0, 'DapUIFloatBorder', { fg = colors.surface0, bg = colors.base })
-
-    dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-    dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-    dap.listeners.before.event_exited['dapui_config'] = dapui.close
+    dap.listeners.before.attach.dapui_config = function()
+      dapui.open()
+    end
+    dap.listeners.before.launch.dapui_config = function()
+      dapui.open()
+    end
+    dap.listeners.before.event_terminated.dapui_config = function()
+      dapui.close()
+    end
+    dap.listeners.before.event_exited.dapui_config = function()
+      dapui.close()
+    end
 
     -- Install golang specific config
     require('dap-go').setup {

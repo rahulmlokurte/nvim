@@ -1,18 +1,18 @@
 return {
-  "nvim-lualine/lualine.nvim",
+  'nvim-lualine/lualine.nvim',
   enabled = true,
-  event = "VeryLazy",
+  event = 'VeryLazy',
   opts = function(plugin)
     if plugin.override then
-      require("lazyvim.util").deprecate("lualine.override", "lualine.opts")
+      require('lazyvim.util').deprecate('lualine.override', 'lualine.opts')
     end
 
-    local icons = require("config.icons")
+    local icons = require 'config.icons'
 
     local diagnostics = {
-      "diagnostics",
-      sources = { "nvim_diagnostic" },
-      sections = { "error", "warn", "info", "hint" },
+      'diagnostics',
+      sources = { 'nvim_diagnostic' },
+      sections = { 'error', 'warn', 'info', 'hint' },
       symbols = {
         error = icons.diagnostics.Error,
         hint = icons.diagnostics.Hint,
@@ -25,12 +25,12 @@ return {
     }
 
     local diff = {
-      "diff",
+      'diff',
       symbols = {
-        added = icons.git.added .. " ",
-        untracked = icons.git.added .. " ",
-        modified = icons.git.changed .. " ",
-        removed = icons.git.deleted .. " ",
+        added = icons.git.added .. ' ',
+        untracked = icons.git.added .. ' ',
+        modified = icons.git.changed .. ' ',
+        removed = icons.git.deleted .. ' ',
       },
       colored = true,
       always_visible = false,
@@ -48,17 +48,17 @@ return {
 
     return {
       options = {
-        theme = "catppuccin",
+        theme = 'catppuccin',
         globalstatus = true,
         icons_enabled = true,
         component_separators = '|',
         section_separators = '',
-        disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
+        disabled_filetypes = { statusline = { 'dashboard', 'lazy', 'alpha' } },
       },
       sections = {
         lualine_a = {
           {
-            "filename",
+            'filename',
             path = 0,
             use_mode_colors = true,
             shorting_target = 40,
@@ -67,12 +67,12 @@ return {
               alternate_file = '#', -- Text to show to identify the alternate file
               directory = '', -- Text to show when the buffer is a directory
             },
-          }
+          },
         },
-        lualine_b = { "branch" },
+        lualine_b = { 'branch' },
         lualine_c = { diagnostics },
         lualine_x = { diff },
-        lualine_y = { "progress" },
+        lualine_y = { 'progress' },
         lualine_z = {},
       },
     }

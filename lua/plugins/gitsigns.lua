@@ -15,11 +15,14 @@ return {
         },
       }
       vim.keymap.set('n', '<leader>gp', ':Gitsigns preview_hunk<CR>')
-      vim.keymap.set('n', '<leader>gp', ':Gitsigns preview_hunk<CR>')
       vim.keymap.set('n', '<leader>gb', ':Gitsigns toggle_current_line_blame<CR>')
     end,
   },
   {
     'tpope/vim-fugitive',
+    config = function()
+      vim.api.nvim_set_keymap('n', '<leader>gv', ':Gdiff<CR>', { silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>gm', ':Gvdiffsplit!<CR>', { silent = true })
+    end,
   },
 }
