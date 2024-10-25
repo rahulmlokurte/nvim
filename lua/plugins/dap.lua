@@ -139,6 +139,8 @@ return {
       dapui.close()
     end
 
+    vim.fn.sign_define('DapBreakpoint', { text = '🔴', texthl = 'DapBreakpoint', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
+
     -- Install golang specific config
     require('dap-go').setup {
       delve = {
