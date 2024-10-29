@@ -28,9 +28,6 @@ return {
       ft = 'python',
     }, -- Python debugger
 
-    -- Catppuccin for custom highlights
-    { 'catppuccin/nvim', as = 'catppuccin' },
-
     {
       'theHamsta/nvim-dap-virtual-text',
       config = function()

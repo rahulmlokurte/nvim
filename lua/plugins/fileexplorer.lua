@@ -78,15 +78,13 @@ return {
             position = '50%', -- Center the floating window
             border = {
               style = 'rounded', -- Rounded border
-              padding = { 1, 1 },
-              highlight = 'FloatBorder', -- Set the border highlight
             },
           },
         },
       },
     }
     vim.cmd [[
-  hi FloatBorder guifg=#A6E3A1 guibg=NONE
+  hi FloatBorder guifg=#eb6f92 guibg=NONE
 ]]
   end,
 }
