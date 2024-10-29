@@ -31,7 +31,7 @@ vim.opt.updatetime = 100 -- faster completion (4000ms default)
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 vim.opt.expandtab = true -- convert tabs to spaces
 vim.opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
-vim.opt.cursorline = true -- highlight the current line
+vim.opt.cursorline = false -- highlight the current line
 vim.opt.number = true -- set numbered lines
 vim.opt.breakindent = true -- wrap lines with indent
 vim.opt.relativenumber = true -- set relative numbered lines
@@ -46,7 +46,7 @@ vim.opt.guifont = 'monospace:h17' -- the font used in graphical neovim applicati
 vim.opt.title = true -- set the title of window to the value of the titlestring
 vim.opt.confirm = true -- confirm to save changes before exiting modified buffer
 vim.opt.fillchars = { eob = ' ' } -- change the character at the end of buffer
--- vim.opt.cursorlineopt = "number"              -- set the cursorline
+vim.opt.cursorlineopt = 'number' -- set the cursorline
 vim.opt.tabstop = 4 -- insert 2 spaces for a tab
 vim.opt.softtabstop = 4
 vim.opt.cursorlineopt = both -- vim.opt.laststatus = 0                          -- Always display the status line

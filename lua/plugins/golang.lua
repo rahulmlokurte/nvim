@@ -62,5 +62,8 @@ return {
     event = { 'CmdlineEnter' },
     ft = { 'go', 'gomod' },
     build = ':lua require("go.install").update_all_sync()',
+    config = function()
+      vim.api.nvim_del_keymap('n', '<space>f')
+    end,
   },
 }
