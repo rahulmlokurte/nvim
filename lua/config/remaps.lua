@@ -54,12 +54,6 @@ vim.opt.cursorlineopt = both -- vim.opt.laststatus = 0                          
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 
--- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-
 -- Pane Movements
 
 vim.keymap.set('n', '<C-h>', ':wincmd h<CR>') -- Left
