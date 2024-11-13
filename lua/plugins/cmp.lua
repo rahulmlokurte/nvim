@@ -16,10 +16,11 @@ return {
 
     -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
     require('luasnip.loaders.from_vscode').lazy_load()
-    -- set background for option picker
-    vim.cmd 'highlight CustomCmpPicker guibg=#908caa guifg=#212031 gui=bold'
 
     cmp.setup {
+      view = {
+        entries = { name = 'custom', separator = '|', selection_order = 'near_cursor' },
+      },
       completion = {
         -- completeopt = "menu,menuone,preview,noselect",
         completeopt = 'menu,menuone,preview',
@@ -81,24 +82,28 @@ return {
         },
       },
     }
-    vim.cmd [[
-  highlight! link CmpItemMenu Comment
-  " gray
-  highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
-  " blue
-  highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
-  highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
-  " light blue
-  highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
-  highlight! CmpItemKindInterface guibg=NONE guifg=#9CDCFE
-  highlight! CmpItemKindText guibg=NONE guifg=#9CDCFE
-  " pink
-  highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
-  highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
-  " front
-  highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
-  highlight! CmpItemKindProperty guibg=NONE guifg=#D4D4D4
-  highlight! CmpItemKindUnit guibg=NONE guifg=#D4D4D4
-]]
+    -- Gray for deprecated items (using 'overlay2')
+    vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { bg = 'NONE', strikethrough = true, fg = '#555555' })
+
+    -- Blue for matching items (using 'sapphire')
+    vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { bg = 'NONE', fg = '#589df6' })
+    vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { link = 'CmpItemAbbrMatch' })
+
+    -- Light blue for variables (using 'sky')
+    vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { bg = 'NONE', fg = '#3979bc' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { link = 'CmpItemKindVariable' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindText', { link = 'CmpItemKindVariable' })
+
+    -- Pink for functions and methods (using 'mauve')
+    vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { bg = 'NONE', fg = '#ca9ee6' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { link = 'CmpItemKindFunction' })
+
+    -- Front for keywords, properties, and units (using 'text')
+    vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { bg = 'NONE', fg = '#bbbbbb' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { link = 'CmpItemKindKeyword' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { link = 'CmpItemKindKeyword' })
+
+    -- Custom picker background (using 'lavender' for bg and 'crust' for fg)
+    vim.cmd 'highlight CustomCmpPicker guibg=#74c7ec guifg=#232634 gui=bold'
   end,
 }

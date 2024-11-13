@@ -48,7 +48,7 @@ return {
 
     return {
       options = {
-        theme = 'rose-pine',
+        theme = 'catppuccin',
         globalstatus = true,
         icons_enabled = true,
         component_separators = '|',
