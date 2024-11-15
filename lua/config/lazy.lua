@@ -1,3 +1,6 @@
+-- put this in your main init.lua file ( before lazy setup )
+vim.g.base46_cache = vim.fn.stdpath 'data' .. '/base46_cache/'
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -29,7 +32,7 @@ require('lazy').setup {
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { 'catppuccin', 'habamax' } },
+  install = { colorscheme = { 'nvchad', 'catppuccin', 'habamax' } },
   -- automatically check for plugin updates
   checker = { enabled = false },
   change_detection = {
@@ -37,3 +40,7 @@ require('lazy').setup {
     notify = false,
   },
 }
+-- (method 2, for non lazyloaders) to load all highlights at once
+for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
+  dofile(vim.g.base46_cache .. v)
+end

@@ -2,48 +2,41 @@ return {
   'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
   dependencies = {
-    'hrsh7th/cmp-buffer', -- source for text in buffer
-    'hrsh7th/cmp-path', -- source for file system paths
-    'L3MON4D3/LuaSnip', -- snippet engine
-    'saadparwaiz1/cmp_luasnip', -- for autocompletion
-    'rafamadriz/friendly-snippets', -- useful snippets
-    'onsails/lspkind.nvim', -- vs-code like pictograms
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'L3MON4D3/LuaSnip',
+    'saadparwaiz1/cmp_luasnip',
+    'rafamadriz/friendly-snippets',
+    'onsails/lspkind.nvim',
   },
-  config = function()
+  opts = function()
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
     local lspkind = require 'lspkind'
 
-    -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
-    require('luasnip.loaders.from_vscode').lazy_load()
-
-    cmp.setup {
+    local options = {
       view = {
         entries = { name = 'custom', separator = '|', selection_order = 'near_cursor' },
       },
       completion = {
-        -- completeopt = "menu,menuone,preview,noselect",
         completeopt = 'menu,menuone,preview',
       },
-      snippet = { -- configure how nvim-cmp interacts with snippet engine
+      snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
         end,
       },
       window = {
-        completion = cmp.config.window.bordered {
-          winhighlight = 'CursorLine:CustomCmpPicker',
-        },
+        completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
-        scrollbar = false,
       },
       mapping = cmp.mapping.preset.insert {
-        ['<C-p>'] = cmp.mapping.select_prev_item(), -- previous suggestion
-        ['<C-n>'] = cmp.mapping.select_next_item(), -- next suggestion
+        ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<C-n>'] = cmp.mapping.select_next_item(),
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(), -- show completion suggestions
-        ['<C-e>'] = cmp.mapping.abort(), -- close completion window
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Replace,
           select = true,
@@ -67,14 +60,12 @@ return {
           end
         end, { 'i', 's' }),
       },
-      -- sources for autocompletion
       sources = cmp.config.sources {
         { name = 'nvim_lsp' },
-        { name = 'luasnip' }, -- snippets
-        { name = 'buffer' }, -- text within current buffer
-        { name = 'path' }, -- file system paths
+        { name = 'luasnip' },
+        { name = 'buffer' },
+        { name = 'path' },
       },
-      -- configure lspkind for vs-code like pictograms in completion menu
       formatting = {
         format = lspkind.cmp_format {
           maxwidth = 50,
@@ -82,28 +73,13 @@ return {
         },
       },
     }
-    -- Gray for deprecated items (using 'overlay2')
-    vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { bg = 'NONE', strikethrough = true, fg = '#555555' })
 
-    -- Blue for matching items (using 'sapphire')
-    vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { bg = 'NONE', fg = '#589df6' })
-    vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { link = 'CmpItemAbbrMatch' })
+    -- Extend with additional options from 'nvchad.cmp' if it exists
+    local success, nvchad_cmp = pcall(require, 'nvchad.cmp')
+    if success then
+      options = vim.tbl_deep_extend('force', options, nvchad_cmp)
+    end
 
-    -- Light blue for variables (using 'sky')
-    vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { bg = 'NONE', fg = '#3979bc' })
-    vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { link = 'CmpItemKindVariable' })
-    vim.api.nvim_set_hl(0, 'CmpItemKindText', { link = 'CmpItemKindVariable' })
-
-    -- Pink for functions and methods (using 'mauve')
-    vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { bg = 'NONE', fg = '#ca9ee6' })
-    vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { link = 'CmpItemKindFunction' })
-
-    -- Front for keywords, properties, and units (using 'text')
-    vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { bg = 'NONE', fg = '#bbbbbb' })
-    vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { link = 'CmpItemKindKeyword' })
-    vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { link = 'CmpItemKindKeyword' })
-
-    -- Custom picker background (using 'lavender' for bg and 'crust' for fg)
-    vim.cmd 'highlight CustomCmpPicker guibg=#74c7ec guifg=#232634 gui=bold'
+    return options
   end,
 }

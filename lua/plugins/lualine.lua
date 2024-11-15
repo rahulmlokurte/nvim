@@ -48,7 +48,6 @@ return {
 
     return {
       options = {
-        theme = 'catppuccin',
         globalstatus = true,
         icons_enabled = true,
         component_separators = '|',

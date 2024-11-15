@@ -83,8 +83,5 @@ return {
         },
       },
     }
-    vim.cmd [[
-  hi FloatBorder guifg=#eb6f92 guibg=NONE
-]]
   end,
 }
