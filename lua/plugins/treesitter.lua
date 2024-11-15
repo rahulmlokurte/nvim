@@ -8,6 +8,8 @@ return {
       ensure_installed = {
         'c',
         'lua',
+        'regex',
+        'bash',
         'vim',
         'vimdoc',
         'query',
