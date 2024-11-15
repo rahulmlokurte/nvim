@@ -63,7 +63,7 @@ return {
       { '<leader>dw', ":lua require'dap.ui.widgets'.hover()<CR>", silent = true, desc = 'Debug Widget Hover' },
       { '<leader>df', ":lua require'dap.ui.widgets'.centered_float(require'dap.ui.widgets'.scopes)<CR>", silent = true, desc = 'Debug Widget Scopes' },
       { '<leader>dr', ":lua require'dapui'.open({reset = true})<CR>", silent = true, desc = 'Reset Dapui' },
-      { '<leader>drc', ":lua require'dap'.repl.clear()", silent = true, desc = 'Clear Dapui Repl' },
+      { '<leader>drc', ":lua require'dap'.repl.clear()<CR>", silent = true, desc = 'Clear Dapui Repl' },
       unpack(keys),
     }
   end,
