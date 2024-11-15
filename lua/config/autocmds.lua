@@ -31,6 +31,17 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+-- Fix conceallevel for json files
+local json_conceal = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  group = json_conceal,
+  pattern = { 'json', 'jsonc', 'json5' },
+  callback = function()
+    vim.opt_local.conceallevel = 0
+  end,
+})
+
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'java' },
   callback = function()
