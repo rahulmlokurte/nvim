@@ -20,7 +20,7 @@ return {
       local lspkind = require 'lspkind'
       local luasnip = require 'luasnip'
 
-      cmp.setup {
+      local options = {
         completion = { completeopt = 'menu,menuone,preview' },
         snippet = {
           expand = function(args)
@@ -71,6 +71,11 @@ return {
           },
         },
       }
+
+      -- Merge NvChad's UI configuration
+      options = vim.tbl_deep_extend('force', options, require 'nvchad.cmp')
+      -- Apply the configuration
+      cmp.setup(options)
     end,
   },
 }
