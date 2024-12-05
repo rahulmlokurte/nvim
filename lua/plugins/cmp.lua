@@ -17,10 +17,20 @@ return {
     },
     config = function()
       local cmp = require 'cmp'
+      local defaults = require 'cmp.config.default'()
       local lspkind = require 'lspkind'
       local luasnip = require 'luasnip'
+      local winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:CmpSel,Search:None'
 
-      local options = {
+      -- Define custom highlights
+      vim.api.nvim_set_hl(0, 'CmpPmenu', { bg = '#1e1e2e', fg = '#cdd6f4' }) -- Match Catppuccin Mocha
+      vim.api.nvim_set_hl(0, 'CmpSel', { bg = '#575268', fg = '#cdd6f4', bold = true })
+      vim.api.nvim_set_hl(0, 'CmpBorder', { fg = '#575268' })
+      vim.api.nvim_set_hl(0, 'CmpItemKind', { fg = '#fab387' }) -- Example for item kind color
+      vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = '#89b4fa', bold = true }) -- Matched text
+      vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { fg = '#89b4fa', underline = true }) -- Fuzzy match
+
+      cmp.setup {
         completion = { completeopt = 'menu,menuone,preview' },
         snippet = {
           expand = function(args)
@@ -28,8 +38,17 @@ return {
           end,
         },
         window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
+          completion = {
+            border = 'rounded',
+            winhighlight = winhighlight,
+            scrollbar = true,
+          },
+          documentation = {
+            border = 'rounded',
+            winhighlight = winhighlight,
+            max_height = math.floor(vim.o.lines * 0.5),
+            max_width = math.floor(vim.o.columns * 0.4),
+          },
         },
         mapping = cmp.mapping.preset.insert {
           ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -58,12 +77,46 @@ return {
           end, { 'i', 's' }),
           ['<CR>'] = cmp.mapping.confirm { select = true, behavior = cmp.ConfirmBehavior.Replace },
         },
-        sources = {
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'buffer' },
-          { name = 'path' },
+        sources = cmp.config.sources({
+          -- keyword_length = 2 to not show completions with single letter identifiers.
+          { name = 'nvim_lsp', keyword_length = 2 },
+          {
+            name = 'luasnip',
+            -- Don't show snippet completions in comments or strings.
+            entry_filter = function()
+              local ctx = require 'cmp.config.context'
+              local in_string = ctx.in_syntax_group 'String' or ctx.in_treesitter_capture 'string'
+              local in_comment = ctx.in_syntax_group 'Comment' or ctx.in_treesitter_capture 'comment'
+
+              return not in_string and not in_comment
+            end,
+          },
+        }, {
+          {
+            name = 'buffer',
+            keyword_length = 3,
+            option = {
+              -- Buffer completions from all visible buffers (that aren't huge).
+              get_bufnrs = function()
+                local bufs = {}
+
+                for _, win in ipairs(vim.api.nvim_list_wins()) do
+                  local buf = vim.api.nvim_win_get_buf(win)
+                  if vim.bo[buf].filetype ~= 'bigfile' then
+                    table.insert(bufs, buf)
+                  end
+                end
+
+                return bufs
+              end,
+            },
+          },
+        }),
+        sorting = defaults.sorting,
+        performance = {
+          max_view_entries = 10,
         },
+        preselect = cmp.PreselectMode.None,
         formatting = {
           format = lspkind.cmp_format {
             maxwidth = 50,
@@ -71,11 +124,6 @@ return {
           },
         },
       }
-
-      -- Merge NvChad's UI configuration
-      options = vim.tbl_deep_extend('force', options, require 'nvchad.cmp')
-      -- Apply the configuration
-      cmp.setup(options)
     end,
   },
 }
