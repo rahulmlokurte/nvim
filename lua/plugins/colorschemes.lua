@@ -1,32 +1,32 @@
 return {
-  'nvim-lua/plenary.nvim',
-
   {
-    'nvchad/ui',
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
     config = function()
-      require 'nvchad'
+      require('catppuccin').setup {
+        transparent_background = true,
+        integrations = {
+          cmp = true,
+          dap = true,
+          fzf = true,
+          gitsigns = true,
+          nvimtree = true,
+          treesitter = true,
+          notify = true,
+          harpoon = true,
+          noice = true,
+          dap_ui = true,
+          treesitter_context = true,
+          telescope = {
+            enabled = true,
+            style = 'nvchad',
+          },
+          lsp_trouble = true,
+          which_key = true,
+        },
+      }
+      vim.cmd.colorscheme 'catppuccin-mocha'
     end,
   },
-
-  {
-    'nvchad/base46',
-    lazy = true,
-    build = function()
-      require('base46').load_all_highlights()
-    end,
-  },
-
-  'nvchad/volt', -- optional, needed for theme switcher
-  -- or just use Telescope themes
-  -- {
-  --   'catppuccin/nvim',
-  --   name = 'catppuccin',
-  --   priority = 1000,
-  --   config = function()
-  --     require('catppuccin').setup {
-  --       transparent_background = true,
-  --     }
-  --     vim.cmd.colorscheme 'catppuccin-mocha'
-  --   end,
-  -- },
 }
