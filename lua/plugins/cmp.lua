@@ -23,12 +23,23 @@ return {
       local winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:CmpSel,Search:None'
 
       -- Define custom highlights
-      vim.api.nvim_set_hl(0, 'CmpPmenu', { bg = '#1e1e2e', fg = '#cdd6f4' }) -- Match Catppuccin Mocha
-      vim.api.nvim_set_hl(0, 'CmpSel', { bg = '#575268', fg = '#cdd6f4', bold = true })
-      vim.api.nvim_set_hl(0, 'CmpBorder', { fg = '#575268' })
-      vim.api.nvim_set_hl(0, 'CmpItemKind', { fg = '#fab387' }) -- Example for item kind color
-      vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = '#89b4fa', bold = true }) -- Matched text
-      vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { fg = '#89b4fa', underline = true }) -- Fuzzy match
+      -- gray
+      vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { bg = 'NONE', strikethrough = true, fg = '#808080' })
+      -- blue
+      vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { bg = 'NONE', fg = '#569CD6' })
+      vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { link = 'CmpIntemAbbrMatch' })
+      -- light blue
+      vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { bg = 'NONE', fg = '#9CDCFE' })
+      vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { link = 'CmpItemKindVariable' })
+      vim.api.nvim_set_hl(0, 'CmpItemKindText', { link = 'CmpItemKindVariable' })
+      -- pink
+      vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { bg = 'NONE', fg = '#C586C0' })
+      vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { link = 'CmpItemKindFunction' })
+      -- front
+      vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { bg = 'NONE', fg = '#D4D4D4' })
+      vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { link = 'CmpItemKindKeyword' })
+      vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { link = 'CmpItemKindKeyword' })
+      vim.api.nvim_set_hl(0, 'CmpSel', { bg = '#74c7ec', fg = '#bac2de', bold = true })
 
       cmp.setup {
         completion = { completeopt = 'menu,menuone,preview' },
@@ -42,12 +53,14 @@ return {
             border = 'rounded',
             winhighlight = winhighlight,
             scrollbar = true,
+            winblend = 0,
           },
           documentation = {
             border = 'rounded',
             winhighlight = winhighlight,
             max_height = math.floor(vim.o.lines * 0.5),
             max_width = math.floor(vim.o.columns * 0.4),
+            winblend = 0,
           },
         },
         mapping = cmp.mapping.preset.insert {
@@ -119,8 +132,16 @@ return {
         preselect = cmp.PreselectMode.None,
         formatting = {
           format = lspkind.cmp_format {
+            mode = 'symbol_text',
             maxwidth = 50,
             ellipsis_char = '...',
+            menu = {
+              buffer = '[Buffer]',
+              nvim_lsp = '[LSP]',
+              luasnip = '[LuaSnip]',
+              nvim_lua = '[Lua]',
+              latex_symbols = '[Latex]',
+            },
           },
         },
       }
