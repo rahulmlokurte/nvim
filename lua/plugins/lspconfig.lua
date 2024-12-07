@@ -170,7 +170,6 @@ return {
         'golines',
         'pyright',
         'mypy',
-        'ruff',
         'black',
         'java-debug-adapter',
         'java-test',

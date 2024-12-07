@@ -1,11 +1,8 @@
 return {
   {
-    'echasnovski/mini.nvim',
-    version = false,
+    'echasnovski/mini.statusline',
     config = function()
-      require('mini.animate').setup {}
-      require('mini.icons').setup {}
-      require('mini.notify').setup {}
+      require('mini.statusline').setup()
     end,
   },
 }
