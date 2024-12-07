@@ -22,13 +22,12 @@ vim.diagnostic.config {
 }
 
 -- Highlight on yank
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_set_hl(0, 'YankHighlight', { fg = '#ffffff', bg = '#ff8800', bold = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
+  group = vim.api.nvim_create_augroup('HighlightOnYank', { clear = true }),
   callback = function()
-    vim.highlight.on_yank { higroup = 'IncSearch', timeout = 200 }
+    vim.highlight.on_yank { higroup = 'YankHighlight', timeout = 200 }
   end,
-  group = highlight_group,
-  pattern = '*',
 })
 
 -- Fix conceallevel for json files
