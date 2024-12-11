@@ -11,7 +11,9 @@ return {
   opts = {
     options = {
       -- For more themes, see https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
-      theme = 'codedark', -- "auto, tokyonight, catppuccin, codedark, nord"
+      theme = 'tokyonight-night', -- "auto, tokyonight, catppuccin, codedark, nord"
+      component_separators = { left = '', right = '' },
+      section_separators = { left = '', right = '' },
     },
     sections = {
       lualine_c = {
@@ -31,6 +33,9 @@ return {
           },
         },
       },
+      lualine_x = { 'filetype' },
+      lualine_y = { 'progress' },
+      lualine_z = { 'location' },
     },
   },
 }
