@@ -47,10 +47,9 @@ vim.opt.guifont = 'monospace:h17' -- the font used in graphical neovim applicati
 vim.opt.title = true -- set the title of window to the value of the titlestring
 vim.opt.confirm = true -- confirm to save changes before exiting modified buffer
 vim.opt.fillchars = { eob = ' ' } -- change the character at the end of buffer
-vim.opt.cursorlineopt = 'number' -- set the cursorline
 vim.opt.tabstop = 2 -- insert 2 spaces for a tab
-vim.opt.softtabstop = 4
-vim.opt.cursorlineopt = both -- vim.opt.laststatus = 0                          -- Always display the status line
+vim.opt.softtabstop = 2
+vim.opt.autoindent = true
 vim.opt.shiftround = true -- Round indent
 vim.opt.virtualedit = 'block' -- Allow cursor to move where there is no text in visual block mode
 vim.opt.wildmode = 'longest:full,full' -- Command-line completion mode
@@ -65,6 +64,8 @@ vim.opt.fillchars = {
   eob = ' ',
 }
 vim.opt.foldlevel = 99
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()' -- Utilize Treesitter folds
 vim.opt.inccommand = 'nosplit' -- preview incremental substitute
 vim.opt.jumpoptions = 'view'
 vim.opt.laststatus = 3 -- global statusline
