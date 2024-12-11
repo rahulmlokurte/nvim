@@ -9,15 +9,17 @@ return {
   config = function()
     local mocha = require('catppuccin.palettes').get_palette 'mocha'
     require('bufferline').setup {
-      highlights = require('catppuccin.groups.integrations.bufferline').get {
-        styles = { 'italic', 'bold' },
-        custom = {
-          all = {
-            fill = { bg = '#000000' },
-          },
-          mocha = {
-            background = { fg = mocha.flamingo },
-          },
+      highlights = {
+        fill = {
+          bg = '#1F1F1F',
+        },
+        tab_selected = {
+          fg = '#D27E99',
+        },
+        buffer_selected = {
+          fg = '#D27E99',
+          bold = true,
+          italic = true,
         },
       },
     }
