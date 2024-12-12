@@ -142,15 +142,14 @@ return {
           },
         },
         gopls = {},
-        pyright = {
-          filetypes = { 'python' },
+        basedpyright = {
           settings = {
-            python = {
+            basedpyright = {
               analysis = {
+                typeCheckingMode = 'off',
                 autoSearchPaths = true,
                 diagnosticMode = 'workspace',
                 useLibraryCodeForTypes = true,
-                typeCheckingMode = 'off',
               },
             },
           },
@@ -168,7 +167,7 @@ return {
         'gofumpt',
         'goimports-reviser',
         'golines',
-        'pyright',
+        'basedpyright',
         'mypy',
         'black',
         'java-debug-adapter',
