@@ -5,8 +5,8 @@ return {
   priority = 1000, -- Load the colorscheme before other non-lazy-loaded plugins
   opts = {
     -- Replace this with your scheme-specific settings or remove to use the defaults
-    transparent = true,
-    style = 'night', -- other variations "storm, night, moon, day"
+    -- transparent = true,
+    style = 'storm', -- other variations "storm, night, moon, day"
     on_highlights = function(hl, c)
       local prompt = '#2d3149'
       hl.TelescopeNormal = {

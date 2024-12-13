@@ -29,7 +29,7 @@ require('lazy').setup {
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { 'tokyonight', 'catppuccin', 'habamax' } },
+  install = { colorscheme = { 'tokyonight-storm', 'catppuccin', 'habamax' } },
   -- automatically check for plugin updates
   checker = { enabled = false },
   change_detection = {
