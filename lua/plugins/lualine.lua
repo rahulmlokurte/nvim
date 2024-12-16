@@ -33,7 +33,19 @@ return {
           },
         },
       },
-      lualine_x = { 'filetype' },
+      lualine_x = {
+        function()
+          local clients = vim.lsp.get_clients()
+          if next(clients) == nil then
+            return 'No LSP'
+          end
+          local client_names = {}
+          for _, client in pairs(clients) do
+            table.insert(client_names, client.name)
+          end
+          return table.concat(client_names, ', ')
+        end,
+      },
       lualine_y = { 'progress' },
       lualine_z = { 'location' },
     },
