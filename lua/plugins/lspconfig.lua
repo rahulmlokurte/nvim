@@ -104,6 +104,10 @@ return {
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, '[T]oggle Inlay [H]ints')
           end
+          if client and client.name == 'ruff' then
+            -- Disable hover in favor of Pyright
+            client.server_capabilities.hoverProvider = false
+          end
         end,
       })
 
@@ -151,6 +155,14 @@ return {
                 diagnosticMode = 'workspace',
                 useLibraryCodeForTypes = true,
               },
+            },
+          },
+        },
+        ruff = {
+          init_options = {
+            trace = 'messages',
+            settings = {
+              logLevel = 'debug',
             },
           },
         },
