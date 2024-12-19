@@ -1,45 +1,52 @@
+---@diagnostic disable: missing-fields
+
 return {
-  -- https://github.com/folke/tokyonight.nvim
-  'folke/tokyonight.nvim', -- You can replace this with your favorite colorscheme
-  lazy = false, -- We want the colorscheme to load immediately when starting Neovim
-  priority = 1000, -- Load the colorscheme before other non-lazy-loaded plugins
-  opts = {
-    -- Replace this with your scheme-specific settings or remove to use the defaults
-    -- transparent = true,
-    style = 'storm', -- other variations "storm, night, moon, day"
-    on_highlights = function(hl, c)
-      local prompt = '#2d3149'
-      hl.TelescopeNormal = {
-        bg = c.bg_dark,
-        fg = c.fg_dark,
-      }
-      hl.TelescopeBorder = {
-        bg = c.bg_dark,
-        fg = c.bg_dark,
-      }
-      hl.TelescopePromptNormal = {
-        bg = prompt,
-      }
-      hl.TelescopePromptBorder = {
-        bg = prompt,
-        fg = prompt,
-      }
-      hl.TelescopePromptTitle = {
-        bg = prompt,
-        fg = prompt,
-      }
-      hl.TelescopePreviewTitle = {
-        bg = c.bg_dark,
-        fg = c.bg_dark,
-      }
-      hl.TelescopeResultsTitle = {
-        bg = c.bg_dark,
-        fg = c.bg_dark,
+  {
+    'LazyVim/LazyVim',
+    opts = {
+      colorscheme = 'everforest',
+    },
+  },
+  {
+    'neanias/everforest-nvim',
+    version = false,
+    priority = 1000,
+    config = function()
+      require('everforest').setup {
+        background = 'hard',
+        on_highlights = function(hl, palette)
+          -- stylua: ignore start
+          -- Git Signs
+          hl.GitSignsAdd    = { fg = "#50FA7B" }
+          hl.GitSignsDelete = { fg = "#FF5555" }
+          hl.GitSignsChange = { fg = "#FFB86C" }
+
+          -- Float
+          hl.FloatBorder = { bg   = palette.none }
+          hl.FloatTitle  = { bg   = palette.none, bold = true      }
+          -- hl.NormalFloat = { link = "Normal"     }
+
+          -- NeoTree
+          hl.NeoTreeNormal        = { link = "Normal"      }
+          hl.NeoTreeFloatBorder   = { link = "FloatBorder" }
+          hl.NeoTreeFloatTitle    = { link = "FloatTitle"  }
+          hl.NeoTreeFloatTitleBar = { link = "FloatBorder" }
+          hl.NeoTreeFloatNormal   = { link = "NormalFloat" }
+          hl.NeoTreeTitleBar      = { link = "FloatTitle"  }
+          hl.NeoTreeEndOfBuffer   = { link = "EndOfBuffer" }
+
+          hl.AlphaHeader   = { bg = palette.bg, fg = palette.aqua }
+          hl.AlphaShortcut = { bg = palette.bg, fg = palette.orange, bold = true }
+          hl.AlphaButtons  = { bg = palette.bg, fg = palette.blue }
+          hl.AlphaFooter   = { bg = palette.bg, fg = palette.aqua }
+
+          hl.CurSearch  = { link = "IncSearch" }
+          hl.FlashMatch = { link = "Search"    }
+          hl.FlashLabel = { bg = "#db4b4b", fg = "#eeeeee", bold = true }
+
+          hl.NeoTreeGitUntracked = { fg = palette.yellow }
+        end,
       }
     end,
   },
-  config = function(_, opts)
-    require('tokyonight').setup(opts) -- Replace this with your favorite colorscheme
-    vim.cmd 'colorscheme tokyonight' -- Replace this with your favorite colorscheme
-  end,
 }
