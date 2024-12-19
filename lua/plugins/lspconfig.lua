@@ -26,7 +26,8 @@ return {
       { 'j-hui/fidget.nvim', opts = {} },
 
       -- Allows extra capabilities provided by nvim-cmp
-      'hrsh7th/cmp-nvim-lsp',
+      'Saghen/blink.cmp',
+      -- 'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
       -- LSP (Language Server Protocol) provides features like go-to definition, references, and more.
@@ -114,7 +115,7 @@ return {
       -- Extend LSP capabilities with nvim-cmp for additional features.
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities())
 
       -- Configure and enable language servers. Add/remove LSPs as needed.
       local servers = {
@@ -137,9 +138,6 @@ return {
           -- capabilities = {},
           settings = {
             Lua = {
-              completion = {
-                callSnippet = 'Replace',
-              },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               diagnostics = { disable = { 'missing-fields' } },
             },
