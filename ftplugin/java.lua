@@ -5,7 +5,7 @@ local workspace_dir = '/home/rahul/neo-java/' .. project_name
 
 local lsp_capabilities = require('blink.cmp').get_lsp_capabilities()
 local bundles = {
-  vim.fn.glob('/home/rahul/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-0.53.0.jar', 1),
+  vim.fn.glob('/home/rahul/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/*.jar', 1),
 }
 
 vim.list_extend(bundles, vim.split(vim.fn.glob('/home/rahul/.local/share/nvim/mason/packages/java-test/extension/server/*.jar', 1), '\n'))

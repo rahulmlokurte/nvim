@@ -1,11 +1,9 @@
 return {
   {
     'saghen/blink.cmp',
-    dependencies = {
-      'rafamadriz/friendly-snippets',
-      { 'L3MON4D3/LuaSnip', version = 'v2.*' },
-    },
-    version = 'v0.*',
+    dependencies = { 'rafamadriz/friendly-snippets', { 'L3MON4D3/LuaSnip', version = 'v2.*' } },
+
+    version = '*',
     opts = {
       snippets = {
         expand = function(snippet)
@@ -21,31 +19,28 @@ return {
           require('luasnip').jump(direction)
         end,
       },
-      sources = {
-        default = { 'lsp', 'path', 'luasnip', 'buffer' },
-      },
-      {
-        completion = {
-          menu = {
-            draw = {
-              treesitter = { 'lsp' },
-              columns = { { 'label', 'label_description', gap = 1 }, { 'kind_icon', 'kind' } },
-            },
-          },
-          {
-            list = {
-              selection = 'auto_insert',
-            },
-          },
-        },
-      },
-      keymap = { preset = 'enter', ['<C-y>'] = { 'select_and_accept' } },
-
+      keymap = { preset = 'super-tab' },
       appearance = {
         use_nvim_cmp_as_default = true,
         nerd_font_variant = 'mono',
       },
-      signature = { enabled = true },
+      sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+      },
+      enabled = function()
+        return vim.bo.buftype ~= 'prompt' and vim.b.completion ~= false
+      end,
+      completion = {
+        documentation = {
+          window = {
+            border = 'padded',
+          },
+        },
+      },
+      signature = {
+        enabled = true,
+      },
     },
+    opts_extend = { 'sources.default' },
   },
 }
