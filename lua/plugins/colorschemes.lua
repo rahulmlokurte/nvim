@@ -4,8 +4,29 @@ return {
   {
     'LazyVim/LazyVim',
     opts = {
-      colorscheme = 'everforest',
+      colorscheme = 'catppuccin',
     },
+  },
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+    config = function()
+      require('catppuccin').setup {
+        flavour = 'mocha',
+        transparent_background = true,
+        custom_highlights = function(colors)
+          return {
+            Normal = { bg = colors.crust },
+            -- Blink
+            BlinkCmpMenu = { bg = colors.mantle },
+            BlinkCmpMenuSelection = { fg = colors.green },
+            BlinkCmpDoc = { bg = colors.surface0 },
+            BlinkCmpScrollBarThumb = { bg = colors.blue },
+          }
+        end,
+      }
+    end,
   },
   {
     'neanias/everforest-nvim',
@@ -14,8 +35,12 @@ return {
     config = function()
       require('everforest').setup {
         background = 'hard',
+        transparent_background_level = 2,
         on_highlights = function(hl, palette)
           -- stylua: ignore start
+          -- Set transparent background for all plugins
+          hl.Normal = { bg = palette.none}
+
           -- Git Signs
           hl.GitSignsAdd    = { fg = "#50FA7B" }
           hl.GitSignsDelete = { fg = "#FF5555" }
@@ -24,27 +49,16 @@ return {
           -- Float
           hl.FloatBorder = { bg   = palette.none }
           hl.FloatTitle  = { bg   = palette.none, bold = true      }
-          -- hl.NormalFloat = { link = "Normal"     }
+          hl.NormalFloat = { link = "Normal"     }
 
-          -- NeoTree
-          hl.NeoTreeNormal        = { link = "Normal"      }
-          hl.NeoTreeFloatBorder   = { link = "FloatBorder" }
-          hl.NeoTreeFloatTitle    = { link = "FloatTitle"  }
-          hl.NeoTreeFloatTitleBar = { link = "FloatBorder" }
-          hl.NeoTreeFloatNormal   = { link = "NormalFloat" }
-          hl.NeoTreeTitleBar      = { link = "FloatTitle"  }
-          hl.NeoTreeEndOfBuffer   = { link = "EndOfBuffer" }
-
-          hl.AlphaHeader   = { bg = palette.bg, fg = palette.aqua }
-          hl.AlphaShortcut = { bg = palette.bg, fg = palette.orange, bold = true }
-          hl.AlphaButtons  = { bg = palette.bg, fg = palette.blue }
-          hl.AlphaFooter   = { bg = palette.bg, fg = palette.aqua }
+          -- Blink
+         hl.BlinkCmpMenu = { link = "FloatBorder"}
+          hl.BlinkCmpDocBorder = {bg = "#000000"}
+          hl.BlinkCmpDoc = {bg = "#000000"}
 
           hl.CurSearch  = { link = "IncSearch" }
           hl.FlashMatch = { link = "Search"    }
           hl.FlashLabel = { bg = "#db4b4b", fg = "#eeeeee", bold = true }
-
-          hl.NeoTreeGitUntracked = { fg = palette.yellow }
         end,
       }
     end,

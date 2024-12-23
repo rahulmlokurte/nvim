@@ -33,7 +33,7 @@ return {
       completion = {
         documentation = {
           window = {
-            border = 'padded',
+            border = 'none',
           },
         },
       },

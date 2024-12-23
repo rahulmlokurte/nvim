@@ -11,9 +11,9 @@ return {
   opts = {
     options = {
       -- For more themes, see https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
-      theme = 'auto', -- "auto, tokyonight, catppuccin, codedark, nord"
-      component_separators = { left = '', right = '' },
-      section_separators = { left = '', right = '' },
+      theme = 'catppuccin', -- "auto, tokyonight, catppuccin, codedark, nord"
+      component_separators = { left = '', right = '' },
+      section_separators = { left = '', right = '' },
     },
     sections = {
       lualine_c = {
@@ -46,8 +46,8 @@ return {
           return table.concat(client_names, ', ')
         end,
       },
-      lualine_y = { 'progress' },
-      lualine_z = { 'location' },
+      lualine_y = { { 'progress', color = { bg = '#000000' } } },
+      lualine_z = { { 'location' } },
     },
   },
 }

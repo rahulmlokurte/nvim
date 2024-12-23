@@ -13,6 +13,7 @@ return {
           return vim.fn.executable 'make' == 1
         end,
       },
+      { 'nvim-telescope/telescope-frecency.nvim', version = '*' },
       { 'debugloop/telescope-undo.nvim' },
       { 'nvim-telescope/telescope-ui-select.nvim' },
       { 'nvim-telescope/telescope-dap.nvim' },
@@ -122,6 +123,7 @@ return {
       telescope.load_extension 'ui-select'
       telescope.load_extension 'undo'
       telescope.load_extension 'dap'
+      telescope.load_extension 'frecency'
 
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find File' })
       vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = 'Find Git files' })
