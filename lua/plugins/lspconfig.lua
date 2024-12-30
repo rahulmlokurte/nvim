@@ -191,6 +191,8 @@ return {
         'emmet_ls',
         'prismals',
         'prettierd',
+        'codelldb',
+        'cpptools',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
