@@ -25,6 +25,7 @@ return {
         'json',
         'markdown',
         'markdown_inline',
+        'latex',
         'go',
       },
       sync_install = false,
