@@ -4,7 +4,7 @@ return {
   {
     'LazyVim/LazyVim',
     opts = {
-      colorscheme = 'catppuccin',
+      colorscheme = 'everforest',
     },
   },
   {
@@ -14,7 +14,7 @@ return {
     config = function()
       require('catppuccin').setup {
         flavour = 'mocha',
-        transparent_background = true,
+        transparent_background = false,
         custom_highlights = function(colors)
           return {
             -- Normal = { bg = colors.crust },
@@ -34,31 +34,29 @@ return {
     priority = 1000,
     config = function()
       require('everforest').setup {
-        background = 'hard',
-        transparent_background_level = 2,
         on_highlights = function(hl, palette)
           -- stylua: ignore start
           -- Set transparent background for all plugins
-          hl.Normal = { bg = palette.none}
+          -- hl.Normal = { bg = palette.none}
 
           -- Git Signs
           hl.GitSignsAdd    = { fg = "#50FA7B" }
           hl.GitSignsDelete = { fg = "#FF5555" }
           hl.GitSignsChange = { fg = "#FFB86C" }
 
-          -- Float
-          hl.FloatBorder = { bg   = palette.none }
-          hl.FloatTitle  = { bg   = palette.none, bold = true      }
-          hl.NormalFloat = { link = "Normal"     }
-
-          -- Blink
-         hl.BlinkCmpMenu = { link = "FloatBorder"}
-          hl.BlinkCmpDocBorder = {bg = "#000000"}
-          hl.BlinkCmpDoc = {bg = "#000000"}
-
-          hl.CurSearch  = { link = "IncSearch" }
-          hl.FlashMatch = { link = "Search"    }
-          hl.FlashLabel = { bg = "#db4b4b", fg = "#eeeeee", bold = true }
+          --  -- Float
+          --  hl.FloatBorder = { bg   = palette.none }
+          --  hl.FloatTitle  = { bg   = palette.none, bold = true      }
+          --  hl.NormalFloat = { link = "Normal"     }
+          --
+          --  -- Blink
+          -- hl.BlinkCmpMenu = { link = "FloatBorder"}
+          --  hl.BlinkCmpDocBorder = {bg = "#000000"}
+          --  hl.BlinkCmpDoc = {bg = "#000000"}
+          --
+          --  hl.CurSearch  = { link = "IncSearch" }
+          --  hl.FlashMatch = { link = "Search"    }
+          --  hl.FlashLabel = { bg = "#db4b4b", fg = "#eeeeee", bold = true }
         end,
       }
     end,

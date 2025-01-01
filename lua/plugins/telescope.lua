@@ -138,6 +138,7 @@ return {
       vim.keymap.set('n', '<leader>ft', '<cmd>TodoTelescope<cr>', { desc = 'List Todo' })
       vim.keymap.set('n', '<leader>u', '<cmd>Telescope undo<cr>', { desc = 'Telescope Undo' })
       vim.keymap.set('n', '<leader>co', '<cmd>Telescope colorscheme<cr>', { desc = 'Telescope colorscheme' })
+      vim.keymap.set('n', '<leader>fr', '<cmd>Telescope resume<cr>', { desc = 'Telescope Resume' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
