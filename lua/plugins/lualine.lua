@@ -11,7 +11,7 @@ return {
   opts = {
     options = {
       -- For more themes, see https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
-      theme = 'everforest', -- "auto, tokyonight, catppuccin, codedark, nord"
+      theme = 'catppuccin', -- "auto, tokyonight, catppuccin, codedark, nord"
       component_separators = { left = '', right = '' },
       section_separators = { left = '', right = '' },
     },

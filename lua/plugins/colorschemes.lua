@@ -4,7 +4,7 @@ return {
   {
     'LazyVim/LazyVim',
     opts = {
-      colorscheme = 'everforest',
+      colorscheme = 'catppuccin',
     },
   },
   {
@@ -14,13 +14,13 @@ return {
     config = function()
       require('catppuccin').setup {
         flavour = 'mocha',
-        transparent_background = false,
+        transparent_background = true,
         custom_highlights = function(colors)
           return {
             -- Normal = { bg = colors.crust },
             -- Blink
             BlinkCmpMenu = { bg = colors.mantle },
-            BlinkCmpMenuSelection = { fg = colors.green },
+            BlinkCmpMenuSelection = { fg = colors.yellow },
             BlinkCmpDoc = { bg = colors.surface0 },
             BlinkCmpScrollBarThumb = { bg = colors.mauve },
           }
