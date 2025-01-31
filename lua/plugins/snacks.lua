@@ -4,6 +4,12 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
+      explorer = {
+        enabled = true,
+      },
+      pickers = {
+        enabled = true,
+      },
       animate = {
         enabled = true,
       },
@@ -23,6 +29,41 @@ return {
       },
     },
     keys = {
+      {
+        '<leader>ff',
+        function()
+          Snacks.picker.files()
+        end,
+        desc = 'Find Files',
+      },
+      {
+        '<leader>fg',
+        function()
+          Snacks.picker.grep()
+        end,
+        desc = 'Grep',
+      },
+      {
+        '<leader>fh',
+        function()
+          Snacks.picker.help()
+        end,
+        desc = 'Help Pages',
+      },
+      {
+        '<leader>fr',
+        function()
+          Snacks.picker.recent()
+        end,
+        desc = 'Recent',
+      },
+      {
+        '<leader>e',
+        function()
+          Snacks.explorer()
+        end,
+        desc = 'Explorer Snacks (cwd)',
+      },
       {
         '<leader>z',
         function()
