@@ -31,9 +31,13 @@ return {
         return vim.bo.buftype ~= 'prompt' and vim.b.completion ~= false
       end,
       completion = {
+        menu = {
+          border = 'single',
+        },
         documentation = {
+          auto_show = true,
           window = {
-            border = 'none',
+            border = 'single',
           },
         },
       },
