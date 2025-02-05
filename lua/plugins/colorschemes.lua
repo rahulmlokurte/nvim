@@ -19,10 +19,10 @@ return {
           return {
             -- Normal = { bg = colors.crust },
             -- Blink
-            BlinkCmpMenu = { bg = colors.mantle },
-            BlinkCmpMenuSelection = { fg = colors.yellow },
-            BlinkCmpDoc = { bg = colors.surface0 },
-            BlinkCmpScrollBarThumb = { bg = colors.mauve },
+            -- BlinkCmpMenu = { bg = colors.mantle },
+            -- BlinkCmpMenuSelection = { fg = colors.yellow },
+            -- BlinkCmpDoc = { bg = colors.surface0 },
+            -- BlinkCmpScrollBarThumb = { bg = colors.mauve },
           }
         end,
       }
