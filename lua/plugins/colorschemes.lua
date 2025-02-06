@@ -15,6 +15,18 @@ return {
       require('catppuccin').setup {
         flavour = 'mocha',
         transparent_background = true,
+        integrations = {
+          blink_cmp = true,
+          snacks = true,
+          lsp_trouble = true,
+          dadbod_ui = true,
+          which_key = true,
+        },
+        custom_highlights = function(colors)
+          return {
+            BlinkCmpMenuSelection = { bg = colors.red, fg = colors.crust, bold = true },
+          }
+        end,
       }
     end,
   },

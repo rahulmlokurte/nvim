@@ -31,8 +31,17 @@ return {
         return vim.bo.buftype ~= 'prompt' and vim.b.completion ~= false
       end,
       completion = {
+        trigger = {
+          show_on_trigger_character = true,
+        },
         menu = {
+          min_width = 15,
+          max_height = 10,
           border = 'single',
+          draw = {
+            gap = 4,
+          },
+          winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None',
         },
         documentation = {
           auto_show = true,

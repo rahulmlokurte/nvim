@@ -6,8 +6,14 @@ return {
     opts = {
       explorer = {
         enabled = true,
+        replace_netrw = true,
       },
       pickers = {
+        sources = {
+          explorer = {
+            layout = { preset = 'vscode', preview = true },
+          },
+        },
         enabled = true,
       },
       animate = {
