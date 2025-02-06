@@ -21,10 +21,11 @@ return {
           lsp_trouble = true,
           dadbod_ui = true,
           which_key = true,
+          telescope = true,
         },
         custom_highlights = function(colors)
           return {
-            BlinkCmpMenuSelection = { bg = colors.red, fg = colors.crust, bold = true },
+            BlinkCmpMenuSelection = { bg = colors.blue, fg = colors.crust, bold = true },
           }
         end,
       }
