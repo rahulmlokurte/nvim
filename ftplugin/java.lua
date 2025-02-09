@@ -5,10 +5,10 @@ local workspace_dir = '/home/rahul/neo-java/' .. project_name
 
 local lsp_capabilities = require('blink.cmp').get_lsp_capabilities()
 local bundles = {
-  vim.fn.glob('/home/rahul/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/*.jar', 1),
+  vim.fn.glob('/home/rahul/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/*.jar', true),
 }
 
-vim.list_extend(bundles, vim.split(vim.fn.glob('/home/rahul/.local/share/nvim/mason/packages/java-test/extension/server/*.jar', 1), '\n'))
+vim.list_extend(bundles, vim.split(vim.fn.glob('/home/rahul/.local/share/nvim/mason/packages/java-test/extension/server/*.jar', true), '\n'))
 
 local config = {
   capabilities = lsp_capabilities,
@@ -134,7 +134,7 @@ local config = {
     },
   },
   handlers = {
-    ['$/progress'] = function(_, result, ctx)
+    ['$/progress'] = function(_, _, _)
       -- disable progress updates.
     end,
   },
