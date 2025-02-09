@@ -15,6 +15,14 @@ return {
           },
         },
         enabled = true,
+        matcher = {
+          cwd_bonus = true, -- give bonus for matching files in the cwd
+          frecency = true, -- frecency bonus
+          history_bonus = true, -- give more weight to chronological order
+        },
+        debug = {
+          scores = true,
+        },
       },
       animate = {
         enabled = true,
@@ -47,7 +55,13 @@ return {
         win = { style = 'input' },
         expand = true,
       },
-      lazygit = { enabled = true },
+      lazygit = {
+        enabled = true,
+        win = {
+          width = 0,
+          height = 0,
+        },
+      },
       notifier = {
         enabled = true,
         timeout = 2000,
@@ -95,14 +109,36 @@ return {
       {
         '<leader>ff',
         function()
-          Snacks.picker.files()
+          Snacks.picker.files {
+            layout = 'bottom',
+          }
+        end,
+        desc = 'Find Files',
+      },
+      {
+        '<leader>si',
+        function()
+          Snacks.picker.icons {
+            layout = 'bottom',
+          }
+        end,
+        desc = 'Icons',
+      },
+      {
+        '<leader>fb',
+        function()
+          Snacks.picker.buffers {
+            layout = 'bottom',
+          }
         end,
         desc = 'Find Files',
       },
       {
         '<leader>fg',
         function()
-          Snacks.picker.grep()
+          Snacks.picker.grep {
+            layout = 'bottom',
+          }
         end,
         desc = 'Grep',
       },
