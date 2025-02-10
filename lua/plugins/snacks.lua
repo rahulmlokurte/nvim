@@ -159,7 +159,9 @@ return {
       {
         '<leader>e',
         function()
-          Snacks.explorer()
+          Snacks.explorer {
+            matcher = { fuzzy = true },
+          }
         end,
         desc = 'Explorer Snacks (cwd)',
       },
