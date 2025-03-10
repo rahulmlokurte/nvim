@@ -31,9 +31,6 @@ return {
         return vim.bo.buftype ~= 'prompt' and vim.b.completion ~= false
       end,
       completion = {
-        trigger = {
-          show_on_trigger_character = true,
-        },
         menu = {
           min_width = 15,
           max_height = 10,
