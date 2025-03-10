@@ -33,7 +33,7 @@ return {
       bigfile = {
         enabled = true,
         notify = true,
-        size = 100 * 1024, -- 100 KB
+        size = 2000 * 1024, -- 100 KB
       },
       dashboard = { enabled = true },
       dim = {
