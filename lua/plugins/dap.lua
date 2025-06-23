@@ -122,22 +122,22 @@ return {
       },
     }
 
-    -- Dap UI setup
+    -- Dap UI setup with Enhanced Icons
     -- For more information, see |:help nvim-dap-ui|
     dapui.setup {
       controls = {
         element = 'repl',
         enabled = true,
         icons = {
-          disconnect = '',
-          pause = '',
-          play = '',
-          run_last = '',
-          step_back = '',
-          step_into = '',
-          step_out = '',
-          step_over = '',
-          terminate = '',
+          disconnect = '■',     -- Stop square
+          pause = '⏸',          -- Pause symbol
+          play = '▶',           -- Play triangle
+          run_last = '↻',       -- Refresh/replay
+          step_back = '◀',      -- Step back
+          step_into = '▼',      -- Step into (down arrow)
+          step_out = '▲',       -- Step out (up arrow)
+          step_over = '▶',      -- Step over (next)
+          terminate = '■',      -- Terminate (stop)
         },
       },
       element_mappings = {},
@@ -150,9 +150,9 @@ return {
       },
       force_buffers = true,
       icons = {
-        collapsed = '',
-        current_frame = '',
-        expanded = '',
+        collapsed = '▶',        -- Right-pointing triangle
+        current_frame = '👉',    -- Pointing finger for current frame
+        expanded = '▼',         -- Down-pointing triangle
       },
       layouts = {
         {
@@ -213,13 +213,45 @@ return {
       dapui.close()
     end
 
+    -- Enhanced Sign Definitions with Better Icons and Colors
     vim.api.nvim_set_hl(0, 'DapStoppedHl', { fg = '#98BB6C', bg = '#2A2A2A', bold = true })
     vim.api.nvim_set_hl(0, 'DapStoppedLineHl', { bg = '#204028', bold = true })
-    vim.fn.sign_define('DapStopped', { text = '', texthl = 'DapStoppedHl', linehl = 'DapStoppedLineHl', numhl = '' })
-    vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = '' })
-    vim.fn.sign_define('DapBreakpointCondition', { text = '', texthl = 'DiagnosticSignWarn', linehl = '', numhl = '' })
-    vim.fn.sign_define('DapBreakpointRejected', { text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = '' })
-    vim.fn.sign_define('DapLogPoint', { text = '', texthl = 'DiagnosticSignInfo', linehl = '', numhl = '' })
+    vim.api.nvim_set_hl(0, 'DapBreakpointHl', { fg = '#FF6B6B', bold = true })
+    vim.api.nvim_set_hl(0, 'DapBreakpointConditionHl', { fg = '#FFD93D', bold = true })
+    vim.api.nvim_set_hl(0, 'DapBreakpointRejectedHl', { fg = '#FF4757', bold = true })
+    vim.api.nvim_set_hl(0, 'DapLogPointHl', { fg = '#74B9FF', bold = true })
+
+    -- Enhanced breakpoint and debugging state icons
+    vim.fn.sign_define('DapStopped', { 
+      text = '🔍', 
+      texthl = 'DapStoppedHl', 
+      linehl = 'DapStoppedLineHl', 
+      numhl = '' 
+    })
+    vim.fn.sign_define('DapBreakpoint', { 
+      text = '🔴', 
+      texthl = 'DapBreakpointHl', 
+      linehl = '', 
+      numhl = '' 
+    })
+    vim.fn.sign_define('DapBreakpointCondition', { 
+      text = '🟡', 
+      texthl = 'DapBreakpointConditionHl', 
+      linehl = '', 
+      numhl = '' 
+    })
+    vim.fn.sign_define('DapBreakpointRejected', { 
+      text = '❌', 
+      texthl = 'DapBreakpointRejectedHl', 
+      linehl = '', 
+      numhl = '' 
+    })
+    vim.fn.sign_define('DapLogPoint', { 
+      text = '📝', 
+      texthl = 'DapLogPointHl', 
+      linehl = '', 
+      numhl = '' 
+    })
 
     -- AutoCompletion for DAP UI
     require('cmp').setup {

@@ -1,25 +1,25 @@
 local jdtls = require 'jdtls'
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 
-local workspace_dir = '/home/rahul/neo-java/' .. project_name
+local workspace_dir = '/Users/rahul.lokurte/neo-java/' .. project_name
 
 local lsp_capabilities = require('blink.cmp').get_lsp_capabilities()
 local bundles = {
-  vim.fn.glob('/home/rahul/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/*.jar', true),
+  vim.fn.glob('/Users/rahul.lokurte/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/*.jar', true),
 }
 
-vim.list_extend(bundles, vim.split(vim.fn.glob('/home/rahul/.local/share/nvim/mason/packages/java-test/extension/server/*.jar', true), '\n'))
+vim.list_extend(bundles, vim.split(vim.fn.glob('/Users/rahul.lokurte/.local/share/nvim/mason/packages/java-test/extension/server/*.jar', true), '\n'))
 
 local config = {
   capabilities = lsp_capabilities,
   cmd = {
-    '/home/rahul/.sdkman/candidates/java/current/bin/java',
+    '/opt/homebrew/opt/openjdk@21/bin/java',
     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
     '-Dosgi.bundles.defaultStartLevel=4',
     '-Declipse.product=org.eclipse.jdt.ls.core.product',
     '-Dlog.protocol=true',
     '-Dlog.level=ALL',
-    '-javaagent:/home/rahul/software/jdtls/lombok.jar',
+    '-javaagent:/Users/rahul.lokurte/.local/share/nvim/mason/packages/jdtls/lombok.jar',
     '-Xmx1g',
     '--add-modules=ALL-SYSTEM',
     '--add-opens',
@@ -27,9 +27,9 @@ local config = {
     '--add-opens',
     'java.base/java.lang=ALL-UNNAMED',
     '-jar',
-    '/home/rahul/software/jdtls/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar',
+    '/Users/rahul.lokurte/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.7.0.v20250331-1702.jar',
     '-configuration',
-    '/home/rahul/software/jdtls/config_linux/',
+    '/Users/rahul.lokurte/.local/share/nvim/mason/packages/jdtls/config_mac_arm/',
     '-data',
     workspace_dir,
   },
@@ -38,11 +38,11 @@ local config = {
     java = {
       -- Enable code formatting
       format = {
-        enabled = false,
-        -- Use the Google Style guide for code formattingh
+        enabled = true,
+        -- Use Google Java Format for code formatting
         settings = {
-          url = 'file:///home/rahul/neo-java/eclipse-java-style.xml',
-          profile = 'Default',
+          url = vim.fn.stdpath("config") .. "/java-google-style.xml",
+          profile = "GoogleStyle",
         },
       },
       formatOnType = {
@@ -50,7 +50,7 @@ local config = {
       },
       -- Enable downloading archives from eclipse automatically
       eclipse = {
-        downloadSource = true,
+        downloadSources = true,
       },
       -- Enable downloading archives from maven automatically
       maven = {
@@ -64,7 +64,7 @@ local config = {
       contentProvider = {
         preferred = 'fernflower',
       },
-      -- Setup automatical package import oranization on file save
+      -- Setup automatic package import organization on file save
       saveActions = {
         organizeImports = true,
       },
@@ -125,11 +125,21 @@ local config = {
       referencesCodeLens = {
         enabled = true,
       },
-      -- enable inlay hints for parameter names,
+      -- enable inlay hints for parameter names
       inlayHints = {
         parameterNames = {
           enabled = 'all',
         },
+      },
+      -- Add compiler arguments to preserve parameter names
+      compile = {
+        nullAnalysis = {
+          mode = "automatic"
+        }
+      },
+      -- Add JVM arguments for compilation
+      jvm = {
+        args = { "-parameters" }
       },
     },
   },
@@ -141,6 +151,9 @@ local config = {
   init_options = {
     extendedClientCapabilities = jdtls.extendedClientCapabilities,
     bundles = bundles,
+    -- Add JVM arguments to include -parameters flag for Spring Boot parameter name resolution
+    jvm_args = { "-parameters" },
   },
 }
+
 jdtls.start_or_attach(config)
