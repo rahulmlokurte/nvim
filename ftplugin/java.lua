@@ -38,11 +38,11 @@ local config = {
     java = {
       -- Enable code formatting
       format = {
-        enabled = true,
-        -- Use Google Java Format for code formatting
+        enabled = false,
+        -- Use IntelliJ IDEA Default style for code formatting
         settings = {
-          url = vim.fn.stdpath("config") .. "/java-google-style.xml",
-          profile = "GoogleStyle",
+          url = vim.fn.stdpath 'config' .. '/java-intellij-default.xml',
+          profile = 'Default',
         },
       },
       formatOnType = {
@@ -134,12 +134,12 @@ local config = {
       -- Add compiler arguments to preserve parameter names
       compile = {
         nullAnalysis = {
-          mode = "automatic"
-        }
+          mode = 'automatic',
+        },
       },
       -- Add JVM arguments for compilation
       jvm = {
-        args = { "-parameters" }
+        args = { '-parameters' },
       },
     },
   },
@@ -152,7 +152,7 @@ local config = {
     extendedClientCapabilities = jdtls.extendedClientCapabilities,
     bundles = bundles,
     -- Add JVM arguments to include -parameters flag for Spring Boot parameter name resolution
-    jvm_args = { "-parameters" },
+    jvm_args = { '-parameters' },
   },
 }
 
