@@ -8,14 +8,14 @@ return {
     },
     config = function()
       -- Use Mason's standard path structure
-      local mason_path = vim.fn.stdpath('data') .. '/mason'
+      local mason_path = vim.fn.stdpath 'data' .. '/mason'
       local codelldb_root = mason_path .. '/packages/codelldb'
       local extension_path = codelldb_root .. '/extension/'
       local codelldb_path = extension_path .. 'adapter/codelldb'
       local liblldb_path = extension_path .. 'lldb/lib/liblldb'
-      
+
       -- Check for different library extensions (macOS uses .dylib, Linux uses .so)
-      if vim.fn.has('mac') == 1 then
+      if vim.fn.has 'mac' == 1 then
         liblldb_path = liblldb_path .. '.dylib'
       else
         liblldb_path = liblldb_path .. '.so'
@@ -57,8 +57,6 @@ return {
           adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
         },
       }
-      
-      vim.notify('rustaceanvim configured successfully with codelldb', vim.log.levels.INFO)
     end,
   },
 }
